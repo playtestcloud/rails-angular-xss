@@ -9,7 +9,7 @@ module Rails
         if disabled?
           string
         else
-          string.gsub('{{'.freeze, '{{ DOUBLE_LEFT_CURLY_BRACE }}'.freeze)
+          string.to_s.gsub('{{'.freeze, '{{ DOUBLE_LEFT_CURLY_BRACE }}'.freeze)
         end
       end
 
