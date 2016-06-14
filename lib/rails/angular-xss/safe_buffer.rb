@@ -8,7 +8,7 @@ ActiveSupport::SafeBuffer.class_eval do
       if arg.html_safe?
         arg
       else
-        html_escape_interpolated_argument_without_rails_xss(AngularXss::Escaper.escape(arg))
+        html_escape_interpolated_argument_without_rails_xss(Rails::AngularXss::Escaper.escape(arg))
       end
     end
 

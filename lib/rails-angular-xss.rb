@@ -1,0 +1,1 @@
+require 'rails/angular-xss'

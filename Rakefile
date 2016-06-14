@@ -6,17 +6,8 @@ task :default => 'all:spec'
 
 
 namespace :travis do
-
   desc 'Run tests on Travis CI'
-  task :run => ['slimgems', 'all:bundle:install', 'all:spec']
-
-  desc 'Install slimgems'
-  task :slimgems do
-    if RUBY_VERSION == '1.8.7'
-      system('gem install slimgems')
-    end
-  end
-
+  task :run => ['all:bundle:install', 'all:spec']
 end
 
 namespace :all do
@@ -59,12 +50,6 @@ def for_each_directory_of(path, &block)
   Dir[path].sort.each do |rakefile|
     directory = File.dirname(rakefile)
     puts '', "\033[44m#{directory}\033[0m", ''
-
-    if (RUBY_VERSION == '1.8.7' && directory =~ /-4\.2$/) ||
-      (RUBY_VERSION != '1.8.7' && directory =~ /-2\.3$/)
-      puts "Skipping tests for Ruby #{RUBY_VERSION} since it is unsupported"
-    else
-      block.call(directory)
-    end
+    block.call(directory)
   end
 end
