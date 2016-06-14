@@ -10,6 +10,11 @@ And by auto-escaped we mean replacing `{{` with ` { { `. To leave AngularJS inte
 **This is an unsatisfactory hack.**
 A better solution is very much desired, but is not possible without some changes in AngularJS. See the [related AngularJS issue](https://github.com/angular/angular.js/issues/5601).
 
+Requirements
+------------
+
+* Rails 4.2
+
 
 Disable escaping locally
 ------------------------

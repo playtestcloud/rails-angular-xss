@@ -42,7 +42,7 @@ shared_examples_for 'engine preventing Angular XSS' do
 
   it 'does not escape Angular interpolation marks in a block where AngularXSS is disabled' do
     result = nil
-    AngularXss.disable do
+    Rails::AngularXss.disable do
       result = html
     end
 
@@ -51,7 +51,7 @@ shared_examples_for 'engine preventing Angular XSS' do
   end
 
   it 'does escape Angular interpolation marks after the block where AngularXSS is disabled' do
-    AngularXss.disable do
+    Rails::AngularXss.disable do
     end
     result = html
 
@@ -63,7 +63,7 @@ shared_examples_for 'engine preventing Angular XSS' do
     class SomeException < StandardError; end
 
     proc {
-      AngularXss.disable do
+      Rails::AngularXss.disable do
         raise SomeException
       end
     }.should raise_error(SomeException)
