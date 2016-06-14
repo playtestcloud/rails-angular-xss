@@ -5,7 +5,7 @@ When rendering AngularJS templates with a server-side templating engine like ERB
 These vulnerabilities are enabled by AngularJS evaluating user-provided strings containing interpolation symbols (default symbols are `{{` and `}}`).
 
 This gem patches ERB/rails_xss so AngularJS interpolation symbols are auto-escaped in unsafe strings.
-And by auto-escaped we mean replacing `{{` with ` { { `. To leave AngularJS interpolation marks unescaped, mark the string as `html_safe`.
+And by auto-escaped we mean replacing `{{` with ` {{ DOUBLE_LEFT_CURLY_BRACE }}`. To leave AngularJS interpolation marks unescaped, mark the string as `html_safe`.
 
 **This is an unsatisfactory hack.**
 A better solution is very much desired, but is not possible without some changes in AngularJS. See the [related AngularJS issue](https://github.com/angular/angular.js/issues/5601).
@@ -40,9 +40,18 @@ Installation
 
 2. Run `bundle install`.
 
-3. Run your test suite to find the places that broke.
+4. **Important:** Add `$rootScope.DOUBLE_LEFT_CURLY_BRACE = '{{'` to your Angular app initialization.
 
-4. Mark any string that is allowed to contain Angular expressions as `#html_safe`.
+5. Run your test suite to find the places that broke.
+
+6. Mark any string that is allowed to contain Angular expressions as `#html_safe`.
+
+How it works
+------------
+
+This gem patches ERB.Util and Rails XSS helpers to escape *any* occurence of the string `{{` with the replacement ``{{ DOUBLE_LEFT_CURLY_BRACE }}`. This will be interpolated by Angular, **and assuming you've followed step 4. above**, Angular returns the interpolated string `{{`.
+
+This allows users to actually use `{{` without it being transformed by some invisible spaces, unicode characaters that *look like*  a curly bracket and so on.
 
 
 Development
