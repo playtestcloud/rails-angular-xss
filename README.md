@@ -16,19 +16,6 @@ Requirements
 * Rails 4.2
 
 
-Disable escaping locally
-------------------------
-
-If you want to disable angular_xss in some part of your app, you can use
-
-```
-Rails::AngularXss.disable do
-  # no escaping here
-end
-# escaped again
-```
-
-
 Installation
 ------------
 
@@ -49,7 +36,7 @@ Installation
 How it works
 ------------
 
-This gem patches ERB.Util and Rails XSS helpers to escape *any* occurence of the string `{{` with the replacement ``{{ DOUBLE_LEFT_CURLY_BRACE }}`. This will be interpolated by Angular, **and assuming you've followed step 4. above**, Angular returns the interpolated string `{{`.
+This gem patches ERB.Util HTML_ESCAPE constants to replace *any* occurence of the string `{{` with the replacement ``{{ DOUBLE_LEFT_CURLY_BRACE }}`. This will be interpolated by Angular, **and assuming you've followed step 4. above**, Angular returns the interpolated string `{{`.
 
 This allows users to actually use `{{` without it being transformed by some invisible spaces, unicode characaters that *look like*  a curly bracket and so on.
 
