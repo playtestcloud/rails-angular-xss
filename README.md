@@ -23,7 +23,7 @@ Installation
 
 1. Put this into your Gemfile
 
-        gem 'angular_xss'
+        gem 'rails-angular-xss'
 
 2. Run `bundle install`.
 
