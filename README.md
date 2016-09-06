@@ -13,7 +13,7 @@ A better solution is very much desired, but is not possible without some changes
 Requirements
 ------------
 
-* Rails 4.2
+* Rails 5.0.x
 
 
 Installation
@@ -36,20 +36,26 @@ Installation
 How it works
 ------------
 
-This gem patches ERB.Util HTML_ESCAPE constants to replace *any* occurence of the string `{{` with the replacement ``{{ DOUBLE_LEFT_CURLY_BRACE }}`. This will be interpolated by Angular, **and assuming you've followed step 4. above**, Angular returns the interpolated string `{{`.
+This gem originally patched ERB::Util HTML_ESCAPE constants to replace *any* occurence of the string `{{` with the replacement ``{{ DOUBLE_LEFT_CURLY_BRACE }}`. This will be interpolated by Angular, **and assuming you've followed step 4. above**, Angular returns the interpolated string `{{`.
 
 This allows users to actually use `{{` without it being transformed by some invisible spaces, unicode characaters that *look like*  a curly bracket and so on.
+
+With Rails 5.0., `ERB::Util` utilizes the native `CGI.escapeHTML` of Ruby 2.3, we thus have to patch `ERB::Util` and `SafeBuffer` to check for `{{` additionally.
 
 
 Development
 -----------
 
 - Fork the repository.
-- Push your changes with specs. There is a Rails 3 test application in `spec/app_root` if you need to test integration with a live Rails app.
+- Push your changes with specs. There is a Rails 5 test application in `spec/app_root` if you need to test integration with a live Rails app.
 - Send a pull request.
 
 
 Credits
 -------
+
+[Oliver Günther](mailto:o.guenther@openproject.com) from [OpenProject](http://openproject.com/).
+
+Original plugin and code for Rails < 5 by
 
 [Henning Koch](mailto:henning.koch@makandra.de) from [makandra](http://makandra.com/).
