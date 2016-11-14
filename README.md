@@ -5,7 +5,7 @@ When rendering AngularJS templates with a server-side templating engine like ERB
 These vulnerabilities are enabled by AngularJS evaluating user-provided strings containing interpolation symbols (default symbols are `{{` and `}}`).
 
 This gem patches ERB/rails_xss so AngularJS interpolation symbols are auto-escaped in unsafe strings.
-And by auto-escaped we mean replacing `{{` with ` {{ DOUBLE_LEFT_CURLY_BRACE }}`. To leave AngularJS interpolation marks unescaped, mark the string as `html_safe`.
+And by auto-escaped we mean replacing `{{` with ` {{ $root.DOUBLE_LEFT_CURLY_BRACE }}`. To leave AngularJS interpolation marks unescaped, mark the string as `html_safe`.
 
 **This is an unsatisfactory hack.**
 A better solution is very much desired, but is not possible without some changes in AngularJS. See the [related AngularJS issue](https://github.com/angular/angular.js/issues/5601).

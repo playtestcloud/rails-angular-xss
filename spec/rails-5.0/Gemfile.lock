@@ -1,8 +1,8 @@
 PATH
   remote: ../..
   specs:
-    rails-angular-xss (0.1.0)
-      rails (>= 4.2.0, < 6.0)
+    rails-angular-xss (0.2.0.pre.pre)
+      rails (>= 5.0.0, < 5.1)
 
 GEM
   remote: http://rubygems.org/

@@ -1,4 +1,13 @@
-## 0.2.0 (unreleased)
+## 0.3.0 (unreleased)
+
+* Use `.$root` reference to root scope
+
+  In isolated scopes, the variable is not automatically inherited from the root scope.
+  However, every scope receives a reference to the root scope through `scope.$root`.
+
+  *Oliver Günther*
+
+## 0.2.0
 
 * Adjust for changes in Rails 5.0
 

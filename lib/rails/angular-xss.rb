@@ -9,7 +9,7 @@ module Rails
 
       def escape!(str)
         if str.include? '{{'
-          str.gsub!('{{', '{{ DOUBLE_LEFT_CURLY_BRACE }}')
+          str.gsub!('{{', '{{ $root.DOUBLE_LEFT_CURLY_BRACE }}')
         end
       end
 
@@ -31,7 +31,7 @@ module Rails
     # Patch ERB::Util.html_escape_once
     redef_without_warning ERB::Util,
                           'HTML_ESCAPE',
-                          ERB::Util::HTML_ESCAPE.merge('{{' => '{{ DOUBLE_LEFT_CURLY_BRACE }}')
+                          ERB::Util::HTML_ESCAPE.merge('{{' => '{{ $root.DOUBLE_LEFT_CURLY_BRACE }}')
 
     redef_without_warning ERB::Util,
                           'HTML_ESCAPE_ONCE_REGEXP',

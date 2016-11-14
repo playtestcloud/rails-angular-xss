@@ -6,12 +6,12 @@ shared_examples_for 'engine preventing Angular XSS' do
 
   it 'escapes Angular interpolation marks in unsafe strings' do
     html.should_not include('{{unsafe}}')
-    html.should include('{{ DOUBLE_LEFT_CURLY_BRACE }}unsafe}}')
+    html.should include('{{ $root.DOUBLE_LEFT_CURLY_BRACE }}unsafe}}')
   end
 
   it 'recognizes the many ways to express an opening curly brace in HTML' do
  
-    html.should include("{{ DOUBLE_LEFT_CURLY_BRACE }}unsafe}}")
+    html.should include("{{ $root.DOUBLE_LEFT_CURLY_BRACE }}unsafe}}")
     html.should_not include("{{unsafe}}")
 
     braces = [
@@ -37,6 +37,6 @@ shared_examples_for 'engine preventing Angular XSS' do
 
   it 'does not escape Angular interpolation marks in safe strings' do
     html.should include("{{safe}}")
-    html.should_not include("{{ DOUBLE_LEFT_CURLY_BRACE }}safe}}")
+    html.should_not include("{{ $root.DOUBLE_LEFT_CURLY_BRACE }}safe}}")
   end
 end
